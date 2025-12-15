@@ -1,0 +1,34 @@
+name: house_rent_app
+description: A simple offline-only app to save house rent information with photos and GPS.
+publish_to: "none"
+version: 1.0.0+1
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.0.5
+  image_picker: ^0.8.7+4
+  geolocator: ^10.0.0
+  uuid: ^3.0.6
+  url_launcher: ^6.1.7
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
+  shared_preferences: ^2.1.1
+  path_provider: ^2.0.11
+  exif: ^2.0.1
+
+  # The following adds the Cupertino Icons font to your application.
+  cupertino_icons: ^1.0.5
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
