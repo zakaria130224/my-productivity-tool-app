@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../rent_tracker/screens/rent_tracker_screen.dart';
 import '../../credit/screens/credit_tracker_screen.dart';
 import '../../notes/screens/notes_screen.dart';
+import '../../compass/screens/compass_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -26,6 +27,11 @@ class HomeScreen extends StatelessWidget {
         'title': 'Notes',
         'icon': Icons.note_alt_outlined,
         'screen': const NotesScreen(),
+      },
+      {
+        'title': 'Compass',
+        'icon': Icons.explore_outlined,
+        'screen': const CompassScreen(),
       },
       {
         'title': 'Settings',
