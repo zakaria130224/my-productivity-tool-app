@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -13,11 +13,12 @@ class DetailScreen extends StatelessWidget {
   final String id;
   const DetailScreen({super.key, required this.id});
 
-  Future<void> _openInMaps(BuildContext context, double lat, double lon, String address) async {
+  Future<void> _openInMaps(
+      BuildContext context, double lat, double lon, String address) async {
     final label = address.isNotEmpty ? address : '$lat,$lon';
     final candidates = <Uri>[
       // geo:lat,long?q=lat,long (android) forces a pin at coordinates
-      Uri.parse('geo:$lat,$lon?q=$lat,$lon'), 
+      Uri.parse('geo:$lat,$lon?q=$lat,$lon'),
       // google maps universal link
       Uri.parse('https://www.google.com/maps/search/?api=1&query=$lat,$lon'),
       // apple maps
@@ -30,7 +31,8 @@ class DetailScreen extends StatelessWidget {
       } catch (_) {}
     }
     if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Could not open maps.')));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Could not open maps.')));
     }
   }
 
@@ -87,7 +89,8 @@ class DetailScreen extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: theme.scaffoldBackgroundColor,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(24)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +115,9 @@ class DetailScreen extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Monthly Rent', style: theme.textTheme.bodyMedium?.copyWith(color: Colors.grey)),
+                            Text('Monthly Rent',
+                                style: theme.textTheme.bodyMedium
+                                    ?.copyWith(color: Colors.grey)),
                             Text(
                               '\$${entry.rent.toStringAsFixed(0)}',
                               style: theme.textTheme.headlineMedium?.copyWith(
@@ -126,7 +131,9 @@ class DetailScreen extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text('Service', style: theme.textTheme.bodyMedium?.copyWith(color: Colors.grey)),
+                              Text('Service',
+                                  style: theme.textTheme.bodyMedium
+                                      ?.copyWith(color: Colors.grey)),
                               Text(
                                 '+\$${entry.serviceCharge!.toStringAsFixed(0)}',
                                 style: theme.textTheme.titleMedium?.copyWith(
@@ -143,20 +150,25 @@ class DetailScreen extends StatelessWidget {
 
                   // Services
                   if (entry.services.isNotEmpty) ...[
-                    Text('Included Services', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                    Text('Included Services',
+                        style: theme.textTheme.titleMedium
+                            ?.copyWith(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 12),
                     Wrap(
                       spacing: 12,
                       runSpacing: 12,
                       children: entry.services.map((s) {
                         return Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
                           decoration: BoxDecoration(
                             color: colorScheme.surface,
                             borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: colorScheme.primary.withOpacity(0.1)),
+                            border: Border.all(
+                                color: colorScheme.primary.withOpacity(0.1)),
                           ),
-                          child: Text(s, style: TextStyle(color: colorScheme.primary)),
+                          child: Text(s,
+                              style: TextStyle(color: colorScheme.primary)),
                         );
                       }).toList(),
                     ),
@@ -165,7 +177,9 @@ class DetailScreen extends StatelessWidget {
 
                   // Notes
                   if (entry.notes.isNotEmpty) ...[
-                    Text('Notes', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                    Text('Notes',
+                        style: theme.textTheme.titleMedium
+                            ?.copyWith(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
                     Container(
                       width: double.infinity,
@@ -174,13 +188,16 @@ class DetailScreen extends StatelessWidget {
                         color: colorScheme.surface,
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Text(entry.notes, style: theme.textTheme.bodyMedium),
+                      child:
+                          Text(entry.notes, style: theme.textTheme.bodyMedium),
                     ),
                     const SizedBox(height: 24),
                   ],
 
                   // Location
-                  Text('Location', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                  Text('Location',
+                      style: theme.textTheme.titleMedium
+                          ?.copyWith(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 12),
                   Container(
                     height: 250,
@@ -192,21 +209,26 @@ class DetailScreen extends StatelessWidget {
                     child: (entry.latitude != null && entry.longitude != null)
                         ? FlutterMap(
                             options: MapOptions(
-                              initialCenter: LatLng(entry.latitude!, entry.longitude!),
+                              initialCenter:
+                                  LatLng(entry.latitude!, entry.longitude!),
                               initialZoom: 15.0,
                             ),
                             children: [
                               TileLayer(
-                                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                                userAgentPackageName: 'com.example.house_rent_app',
+                                urlTemplate:
+                                    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                userAgentPackageName:
+                                    'com.example.house_rent_app',
                               ),
                               MarkerLayer(
                                 markers: [
                                   Marker(
-                                    point: LatLng(entry.latitude!, entry.longitude!),
+                                    point: LatLng(
+                                        entry.latitude!, entry.longitude!),
                                     width: 80,
                                     height: 80,
-                                    child: const Icon(Icons.location_on, color: Colors.red, size: 40),
+                                    child: const Icon(Icons.location_on,
+                                        color: Colors.red, size: 40),
                                   ),
                                 ],
                               ),
@@ -218,7 +240,8 @@ class DetailScreen extends StatelessWidget {
                   if (entry.latitude != null && entry.longitude != null)
                     Center(
                       child: TextButton.icon(
-                        onPressed: () => _openInMaps(context, entry.latitude!, entry.longitude!, entry.address),
+                        onPressed: () => _openInMaps(context, entry.latitude!,
+                            entry.longitude!, entry.address),
                         icon: const Icon(Icons.open_in_new),
                         label: const Text('Open in External Maps'),
                       ),

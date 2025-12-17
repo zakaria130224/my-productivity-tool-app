@@ -3,6 +3,8 @@ import '../../rent_tracker/screens/rent_tracker_screen.dart';
 import '../../credit/screens/credit_tracker_screen.dart';
 import '../../notes/screens/notes_screen.dart';
 import '../../compass/screens/compass_screen.dart';
+import '../../ar_measurement/screens/ar_measurement_screen.dart';
+import '../../qr_scanner/screens/qr_scanner_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -37,6 +39,16 @@ class HomeScreen extends StatelessWidget {
         'title': 'Settings',
         'icon': Icons.settings_outlined,
         'screen': const Scaffold(body: Center(child: Text('Settings'))),
+      },
+      {
+        'title': 'Measure',
+        'icon': Icons.square_foot_outlined,
+        'screen': const ArMeasurementScreen(),
+      },
+      {
+        'title': 'QR iT',
+        'icon': Icons.qr_code_scanner,
+        'screen': const QrScannerScreen(),
       },
     ];
 
@@ -99,7 +111,8 @@ class HomeScreen extends StatelessWidget {
                               color: colorScheme.primary.withOpacity(0.05),
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            child: Icon(app['icon'], color: colorScheme.primary, size: 28),
+                            child: Icon(app['icon'],
+                                color: colorScheme.primary, size: 28),
                           ),
                           Text(
                             app['title'],

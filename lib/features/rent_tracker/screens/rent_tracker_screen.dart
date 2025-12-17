@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +17,7 @@ class RentTrackerScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('My Rent Tracker'), 
+        title: const Text('My Rent Tracker'),
       ),
       body: Consumer<HouseProvider>(
         builder: (context, provider, _) {
@@ -36,7 +34,9 @@ class RentTrackerScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Status', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                      Text('Status',
+                          style: theme.textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.bold)),
                       Row(
                         children: [
                           _buildStatusBadge(colorScheme.secondary, '2 Active'),
@@ -85,7 +85,8 @@ class RentTrackerScreen extends StatelessWidget {
                       Expanded(
                         child: Column(
                           children: [
-                            _buildInfoRow(context, Icons.map_outlined, 'Map View'),
+                            _buildInfoRow(
+                                context, Icons.map_outlined, 'Map View'),
                             _buildInfoRow(context, Icons.history, 'History'),
                             _buildInfoRow(context, Icons.security, 'Security'),
                           ],
@@ -111,14 +112,16 @@ class RentTrackerScreen extends StatelessWidget {
                     Center(
                       child: Padding(
                         padding: const EdgeInsets.all(32.0),
-                        child: Text('No houses added yet.', style: TextStyle(color: Colors.grey[400])),
+                        child: Text('No houses added yet.',
+                            style: TextStyle(color: Colors.grey[400])),
                       ),
                     )
                   else
                     GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 0.7, // Adjust for card height
                         crossAxisSpacing: 12,
@@ -129,12 +132,14 @@ class RentTrackerScreen extends StatelessWidget {
                         return HouseCard(
                           entry: houses[index],
                           onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(builder: (_) => DetailScreen(id: houses[index].id)),
+                            MaterialPageRoute(
+                                builder: (_) =>
+                                    DetailScreen(id: houses[index].id)),
                           ),
                         );
                       },
                     ),
-                    
+
                   // Extra padding for FAB
                   const SizedBox(height: 80),
                 ],
@@ -161,7 +166,8 @@ class RentTrackerScreen extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: TextStyle(color: color, fontWeight: FontWeight.bold, fontSize: 12),
+        style:
+            TextStyle(color: color, fontWeight: FontWeight.bold, fontSize: 12),
       ),
     );
   }
@@ -173,7 +179,9 @@ class RentTrackerScreen extends StatelessWidget {
         children: [
           Icon(icon, size: 20, color: Colors.grey),
           const SizedBox(width: 12),
-          Expanded(child: Text(label, style: const TextStyle(fontWeight: FontWeight.w500))),
+          Expanded(
+              child: Text(label,
+                  style: const TextStyle(fontWeight: FontWeight.w500))),
           const Icon(Icons.chevron_right, color: Colors.grey),
         ],
       ),
